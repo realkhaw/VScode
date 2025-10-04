@@ -278,7 +278,7 @@ function Library:Row(Parent, Title, Desc, Size)
 
 	UIStroke_1.Parent = Rows
 	UIStroke_1.Color = Color3.fromRGB(55,56,58)
-	UIStroke_1.Thickness = 1
+	UIStroke_1.Thickness = 0.75
 
 	Text_1.Name = "Text"
 	Text_1.Parent = Rows
@@ -717,7 +717,6 @@ function Library:app(params)
 				end
 			end
 
-
 			MaxButton.MouseButton1Click:Connect(function()
 				LastSize = Main_1.Size
 
@@ -736,17 +735,17 @@ function Library:app(params)
 				end
 			end)
 
+			local DestroyButton = Library:Button(Destroy_1)
+
+			DestroyButton.MouseButton1Click:Connect(function()
+				Main_1:TweenPosition(UDim2.new(0.5, 0, 0.5, 0), "Out", "Sine", 0.1, true)
+				task.wait(0.1)
+				Main_1:Destroy()
+			end)
 		end
 	end
 
 	local HideButton = Library:Button(Hide_1)
-	local DestroyButton = Library:Button(Destroy_1)
-
-	DestroyButton.MouseButton1Click:Connect(function()
-		Main_1:TweenPosition(UDim2.new(0.5, 0, 0.5, 0), "Out", "Sine", 0.1, true)
-		task.wait(0.1)
-		Main_1:Destroy()
-	end)
 
 	HideButton.MouseButton1Click:Connect(function()
 		Main_1.Visible = false
@@ -2042,7 +2041,6 @@ function Library:app(params)
 					local AddList = Instance.new("Frame")
 					local Title_1 = Instance.new("TextLabel")
 					local UICorner_1 = Instance.new("UICorner")
-					local ClickList = Library:Button(AddList)
 
 					AddList.Name = "AddList"
 					AddList.Parent = ScrollingFrame_1
@@ -2052,6 +2050,8 @@ function Library:app(params)
 					AddList.Position = UDim2.new(0.0309090912, 0,0, 0)
 					AddList.Size = UDim2.new(0, 260,0, 25)
 					AddList.ZIndex = 20
+					
+					local ClickList = Library:Button(AddList)
 
 					Title_1.Name = "Title"
 					Title_1.Parent = AddList
@@ -2360,19 +2360,23 @@ function Library:app(params)
 				Slide.InputBegan:Connect(function(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						dragging = true
+						ScrollingPAGE_1.ScrollingEnabled = false
 						move(input)
-					end
-				end)
-
-				Slide.InputEnded:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-						dragging = false
 					end
 				end)
 
 				UserInputService.InputChanged:Connect(function(input)
 					if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
 						move(input)
+					end
+				end)
+
+				UserInputService.InputEnded:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+						if dragging then
+							dragging = false
+							ScrollingPAGE_1.ScrollingEnabled = true
+						end
 					end
 				end)
 			end
