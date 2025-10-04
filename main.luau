@@ -60,7 +60,7 @@ function Library:Button(p)
 	Click.Text = ""
 	Click.TextColor3 = Color3.fromRGB(0, 0, 0)
 	Click.TextSize = 14.000
-	Click.ZIndex = p.ZIndex + 1
+	Click.ZIndex = p.ZIndex + 3
 
 	return Click
 end
@@ -2213,7 +2213,11 @@ function Library:app(params)
 				local Circle_1 = Instance.new("Frame")
 				local UICorner_4 = Instance.new("UICorner")
 				local UIPadding_1 = Instance.new("UIPadding")
-				local Slide = Library:Button(Side)
+				local Slide = Library:Button(Raw)
+
+				Slide.AnchorPoint = Vector2.new(1, 0)
+				Slide.Position = UDim2.new(1, 0, 0, 0)
+				Slide.Size = UDim2.new(0.5, 0, 1, 0)
 
 				Side.Name = "Side"
 				Side.Parent = Raw
@@ -2255,6 +2259,7 @@ function Library:app(params)
 				TextBox_1.TextColor3 = Color3.fromRGB(178,178,178)
 				TextBox_1.TextSize = 10
 				TextBox_1.TextTruncate = Enum.TextTruncate.AtEnd
+				TextBox_1.ZIndex = Slide.ZIndex + 1
 
 				SliderFrame_1.Name = "SliderFrame"
 				SliderFrame_1.Parent = Side
