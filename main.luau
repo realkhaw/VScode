@@ -1,3 +1,4 @@
+
 local Library = {}
 
 local Players = game:GetService("Players")
@@ -82,7 +83,7 @@ function Library:Button(p)
 	Click.ZIndex = (p.ZIndex or 1) + 3
 
 	Click.Active = true
-	
+
 	return Click
 end
 
@@ -274,7 +275,7 @@ function Library:VectorToUdim(vec2)
 	return UDim2.new(0, vec2.X, 0, vec2.Y)
 end
 
-function Library:Row(Parent, Title, Desc, Size, Icon)
+function Library:Row(Parent, Title, Desc, Size, Icon, IconSize)
 	local Rows = Instance.new("Frame")
 	local UICorner_1 = Instance.new("UICorner")
 	local UIStroke_1 = Instance.new("UIStroke")
@@ -408,7 +409,7 @@ function Library:Row(Parent, Title, Desc, Size, Icon)
 		asset_1.BorderColor3 = Color3.fromRGB(0,0,0)
 		asset_1.BorderSizePixel = 0
 		asset_1.Position = UDim2.new(0, 0,0.5, 0)
-		asset_1.Size = UDim2.new(0, 40,0, 40)
+		asset_1.Size = UDim2.new(0, IconSize,0, IconSize)
 		asset_1.Image = Library:Asset(Icon)
 
 		UIPadding_2.Parent = AssetFrame_1
@@ -1508,13 +1509,14 @@ function Library:app(params)
 				local Title = params.Title or "Unknow"
 				local Desc = params.Desc or nil
 				local Icon = params.Icon or nil
+				local IconSize = params.IconSize or 40
 				local StatusValue = params.Status or "None"
 				local Rower = nil
 
 				if StatusValue ~= "None" then
-					Rower = Library:Row(ScrollingPAGE_1, Title, Desc, nil, Icon)
+					Rower = Library:Row(ScrollingPAGE_1, Title, Desc, nil, Icon, IconSize)
 				else
-					Rower = Library:Row(ScrollingPAGE_1, Title, Desc, 1, Icon)
+					Rower = Library:Row(ScrollingPAGE_1, Title, Desc, 1, Icon, IconSize)
 				end
 
 				local selfs = {}
@@ -1607,7 +1609,8 @@ function Library:app(params)
 				local Title = new.Title
 				local Desc = new.Desc or nil
 				local Icon = new.Icon or nil
-				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.9, Icon)
+				local IconSize = params.IconSize or 40
+				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.9, Icon, IconSize)
 				local Button = Library:Button(Raw.Parent)
 				local Value = new.Value or false
 				local Callback = new.Call or function() return end
@@ -1754,7 +1757,8 @@ function Library:app(params)
 				local Title = new.Title
 				local Desc = new.Desc or nil
 				local Icon = new.Icon or nil
-				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.9, Icon)
+				local IconSize = params.IconSize or 40
+				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.9, Icon, IconSize)
 				local Callback = new.Call or function() return end
 
 				local Button = Instance.new("Frame")
@@ -1845,8 +1849,9 @@ function Library:app(params)
 				local Title = new.Title
 				local Desc = new.Desc or nil
 				local Icon = new.Icon or nil
+				local IconSize = params.IconSize or 40
 				local Value = new.Value or "..."
-				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.55, Icon)
+				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.55, Icon, IconSize)
 				local Callback = new.Call or function() return end
 
 				local Box = Instance.new("Frame")
@@ -1980,6 +1985,7 @@ function Library:app(params)
 				local Title = new.Title or "Dropdown"
 				local Icon = new.Icon or nil
 				local List = new.List or {}
+				local IconSize = params.IconSize or 40
 				local Value = new.Value or "N/A"
 				local Primary = new.Type or "Single" -- Icon, Double, Single
 				local Advance = new.Advance or {
@@ -1990,7 +1996,7 @@ function Library:app(params)
 					['Search'] = "Search ..."
 				}
 				local Multi = new.Multi or (typeof(Value) == "table" and true)
-				local Raw = Library:Row(ScrollingPAGE_1, Title, "N/A", 0.9, Icon)
+				local Raw = Library:Row(ScrollingPAGE_1, Title, "N/A", 0.9, Icon, IconSize)
 				local Call = new.Call or function() return end
 
 				local ElementSignal = {
@@ -2096,12 +2102,12 @@ function Library:app(params)
 				Desc_1.TextTransparency = 0.5
 				Desc_1.TextTruncate = Enum.TextTruncate.AtEnd
 				Desc_1.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				local TextData = {
 					['OnRaw'] = Raw.Text.Desc,
 					['OnDropdown'] = Desc_1
 				}
-				
+
 				local function UpdateText()
 					if typeof(Value) == 'table' then
 						TextData.OnRaw.Text = table.concat(Value, ", ")
@@ -2111,14 +2117,14 @@ function Library:app(params)
 						TextData.OnDropdown.Text = Value
 					end
 				end
-				
+
 				local function SetDesc(a)
 					TextData.OnRaw.Text = a
 					TextData.OnDropdown.Text = a
 				end
 
 				UpdateText()
-				
+
 				local OptionFrame = Instance.new("Frame")
 				local UIPadding_1 = Instance.new("UIPadding")
 				local UIListLayout_1 = Instance.new("UIListLayout")
@@ -2138,7 +2144,7 @@ function Library:app(params)
 				UIListLayout_1.Padding = UDim.new(0,5)
 				UIListLayout_1.FillDirection = Enum.FillDirection.Horizontal
 				UIListLayout_1.SortOrder = Enum.SortOrder.LayoutOrder
-				
+
 				local Box = Instance.new("Frame")
 				local UICorner_1 = Instance.new("UICorner")
 				local UIStroke_1 = Instance.new("UIStroke")
@@ -2197,7 +2203,7 @@ function Library:app(params)
 				Search_1.TextSize = 12
 				Search_1.TextTransparency = 0.5
 				Search_1.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				local Refresh = Instance.new("Frame")
 				local ClickRefresh = Library:Button(Refresh)
 				local UICorner_1 = Instance.new("UICorner")
@@ -2224,7 +2230,7 @@ function Library:app(params)
 				asset_1.Size = UDim2.new(0.600000024, 0,0.600000024, 0)
 				asset_1.Image = "rbxassetid://97804057623763"
 				asset_1.ImageColor3 = Color3.fromRGB(0,0,0)
-				
+
 				local Clear = Instance.new("Frame")
 				local UICorner_1 = Instance.new("UICorner")
 				local ClearText_1 = Instance.new("TextLabel")
@@ -2252,7 +2258,7 @@ function Library:app(params)
 				ClearText_1.Font = Enum.Font.GothamSemibold
 				ClearText_1.Text = Advance['Clear']
 				ClearText_1.TextSize = 13
-				
+
 				local BackFrame = Instance.new("Frame")
 				local UIPadding_1 = Instance.new("UIPadding")
 				local Back_1 = Instance.new("Frame")
@@ -2294,29 +2300,29 @@ function Library:app(params)
 				LeaveIcon_1.Size = UDim2.new(0.699999988, 0,0.699999988, 0)
 				LeaveIcon_1.Image = "rbxassetid://80831702831757"
 				LeaveIcon_1.ImageColor3 = Color3.fromRGB(31,31,31)
-				
+
 				local function OnBack()
 					for _, v in pairs(Page_1:GetChildren()) do
 						if v.Name == 'AddPage' or v.Name == 'AddDropdown' then
 							v.Visible = false
 						end
 					end
-					
+
 					AddPage.Visible = true
 					UIPageLayout_1:JumpTo(AddPage)
 				end
-				
+
 				local function OnLanding()
 					for _, v in pairs(Page_1:GetChildren()) do
 						if v.Name == 'AddPage' or v.Name == 'AddDropdown' then
 							v.Visible = false
 						end
 					end
-					
+
 					AddDropdown.Visible = true
 					UIPageLayout_1:JumpTo(AddDropdown)
 				end
-				
+
 				local All = Instance.new("Frame")
 				local UICorner_1 = Instance.new("UICorner")
 				local AllText_1 = Instance.new("TextLabel")
@@ -2345,10 +2351,10 @@ function Library:app(params)
 				AllText_1.Text = Advance['Select All']
 				AllText_1.TextSize = 13
 				AllText_1.TextWrapped = true
-				
+
 				ClickBack.MouseButton1Click:Connect(OnBack)
 				Buttons.MouseButton1Click:Connect(OnLanding)
-				
+
 				local Scrolling_RE = Instance.new("Frame")
 				local UIPadding_1 = Instance.new("UIPadding")
 
@@ -2364,7 +2370,7 @@ function Library:app(params)
 
 				UIPadding_1.Parent = Scrolling_RE
 				UIPadding_1.PaddingTop = UDim.new(0,70)
-				
+
 				local DropdownScrolling = Instance.new("ScrollingFrame")
 				local UIListLayout_1 = Instance.new("UIListLayout")
 				local UIPadding_1 = Instance.new("UIPadding")
@@ -2394,14 +2400,14 @@ function Library:app(params)
 
 				UIListLayout_1.Parent = DropdownScrolling
 				UIPadding_1.Parent = DropdownScrolling
-				
+
 				UIPadding_1.PaddingBottom = UDim.new(0,1)
 				UIPadding_1.PaddingLeft = UDim.new(0,1)
 				UIPadding_1.PaddingRight = UDim.new(0,1)
 				UIPadding_1.PaddingTop = UDim.new(0,1)
-				
+
 				UIListLayout_1.Padding = UDim.new(0,5)
-				
+
 				Search_1.Changed:Connect(function()
 					local SearchT = string.lower(Search_1.Text)
 					for i, v in pairs(DropdownScrolling:GetChildren()) do
@@ -2415,7 +2421,7 @@ function Library:app(params)
 						end
 					end
 				end)
-				
+
 				local function isValueInTable(val, tbl)
 					if type(tbl) ~= "table" then
 						return false
@@ -2426,12 +2432,12 @@ function Library:app(params)
 							return true
 						end
 					end
-					
+
 					return false
 				end
-				
+
 				local itemslist = {}
-				
+
 				if Primary == 'Single' then
 					UIListLayout_1.SortOrder = Enum.SortOrder.LayoutOrder
 				elseif Primary == 'Double' then
@@ -2443,7 +2449,7 @@ function Library:app(params)
 					UIListLayout_1.FillDirection = Enum.FillDirection.Horizontal
 					UIListLayout_1.Wraps = true
 				end
-				
+
 				local selectedItem
 
 				function itemslist:Clear(a)
@@ -2634,7 +2640,7 @@ function Library:app(params)
 						AssetFrame_1.Visible = false
 						UIPadding_1.PaddingLeft = UDim.new(0,12)
 					end
-					
+
 					if Primary == 'Double' then
 						Rows.Size = UDim2.new(0.49, 0,0, 50)
 					elseif Primary == 'Single' then
@@ -2999,10 +3005,10 @@ function Library:app(params)
 				for _, name in ipairs(List) do
 					itemslist:AddList(name)
 				end
-				
+
 				itemslist.OnValueChanged = ElementSignal.OnValueChanged
 				itemslist.OnRefresh = ElementSignal.OnRefresh
-				
+
 				local Titles = Raw.Text.Title
 				local selfs = {}
 
@@ -3016,7 +3022,7 @@ function Library:app(params)
 						_Icon.Image = Library:Asset(a)
 					end
 				end
-				
+
 				UIListLayout_1:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 					DropdownScrolling.CanvasSize = UDim2.new(0, 0, 0, UIListLayout_1.AbsoluteContentSize.Y + 15)
 				end)
@@ -3030,9 +3036,10 @@ function Library:app(params)
 				local Value = new.Value or ""
 				local Min = new.Min or 1
 				local Max = new.Max or 10
+				local IconSize = params.IconSize or 40
 				local Rounding = new.Rounding or 0
 				local Icon = new.Icon or nil
-				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.475, Icon)
+				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.475, Icon, IconSize)
 				local Callback = new.Call or function() return end
 
 				local selfs = {}
@@ -3266,7 +3273,7 @@ function Library:app(params)
 			function Class:Banner(new)
 				local Banner = new.Banner or "rbxassetid://130155603088446"
 				local SizeY = new.Size or 200
-				
+
 				local Rows = Instance.new("Frame")
 				local UICorner_1 = Instance.new("UICorner")
 				local UIStroke_1 = Instance.new("UIStroke")
