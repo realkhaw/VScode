@@ -1508,10 +1508,10 @@ function Library:app(params)
 				local Title = params.Title or "Unknow"
 				local Desc = params.Desc or nil
 				local Icon = params.Icon or nil
-				local StatusValue = params.Status or false
+				local StatusValue = params.Status or "None"
 				local Rower = nil
 
-				if StatusValue then
+				if StatusValue ~= "None" then
 					Rower = Library:Row(ScrollingPAGE_1, Title, Desc, nil, Icon)
 				else
 					Rower = Library:Row(ScrollingPAGE_1, Title, Desc, 1, Icon)
@@ -1527,7 +1527,7 @@ function Library:app(params)
 
 				Statust.Name = "Status"
 
-				if StatusValue then
+				if StatusValue ~= "None" then
 					StatusValue = true
 				else
 					StatusValue = false
