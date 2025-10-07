@@ -1609,7 +1609,7 @@ function Library:app(params)
 				local Title = new.Title
 				local Desc = new.Desc or nil
 				local Icon = new.Icon or nil
-				local IconSize = params.IconSize or 40
+				local IconSize = new.IconSize or 40
 				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.9, Icon, IconSize)
 				local Button = Library:Button(Raw.Parent)
 				local Value = new.Value or false
@@ -1757,7 +1757,7 @@ function Library:app(params)
 				local Title = new.Title
 				local Desc = new.Desc or nil
 				local Icon = new.Icon or nil
-				local IconSize = params.IconSize or 40
+				local IconSize = new.IconSize or 40
 				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.9, Icon, IconSize)
 				local Callback = new.Call or function() return end
 
@@ -1849,7 +1849,7 @@ function Library:app(params)
 				local Title = new.Title
 				local Desc = new.Desc or nil
 				local Icon = new.Icon or nil
-				local IconSize = params.IconSize or 40
+				local IconSize = new.IconSize or 40
 				local Value = new.Value or "..."
 				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.55, Icon, IconSize)
 				local Callback = new.Call or function() return end
@@ -1985,7 +1985,7 @@ function Library:app(params)
 				local Title = new.Title or "Dropdown"
 				local Icon = new.Icon or nil
 				local List = new.List or {}
-				local IconSize = params.IconSize or 40
+				local IconSize = new.IconSize or 40
 				local Value = new.Value or "N/A"
 				local Primary = new.Type or "Single" -- Icon, Double, Single
 				local Advance = new.Advance or {
@@ -3036,7 +3036,7 @@ function Library:app(params)
 				local Value = new.Value or ""
 				local Min = new.Min or 1
 				local Max = new.Max or 10
-				local IconSize = params.IconSize or 40
+				local IconSize = new.IconSize or 40
 				local Rounding = new.Rounding or 0
 				local Icon = new.Icon or nil
 				local Raw = Library:Row(ScrollingPAGE_1, Title, Desc, 0.475, Icon, IconSize)
